@@ -1,3 +1,6 @@
+/* ========================
+Loading Products from API
+======================== */
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -6,7 +9,10 @@ const loadProducts = () => {
 };
 loadProducts();
 
-// show all product in UI
+/* ========================
+Show all product in UI
+======================== */
+
 const showProducts = (products) => {
   const allProducts = products.map((product) => product);
   for (const product of allProducts) {
@@ -26,7 +32,12 @@ const showProducts = (products) => {
     document.getElementById("all-products").appendChild(div);
   }
 };
+
 let count = 0;
+
+/* ===============================
+Function for Adding and Updating the Cart
+================================== */
 const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
@@ -36,13 +47,18 @@ const addToCart = (id, price) => {
   updateTotal();
 };
 
+/* ========================
+Function for Getting Input Value
+======================== */
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseInt(element);
   return converted;
 };
 
-// main price update function
+/* ========================
+Main Price Update Function
+========================== */
 const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
@@ -50,12 +66,16 @@ const updatePrice = (id, value) => {
   document.getElementById(id).innerText = Math.round(total);
 };
 
-// set innerText function
+/* ========================
+Set Inner Text Function
+========================== */
 const setInnerText = (id, value) => {
   document.getElementById(id).innerText = Math.round(value);
 };
 
-// update delivery charge and total Tax
+/* =======================================
+Updating Delivery and Total Tax Charge Function
+========================================= */
 const updateTaxAndCharge = () => {
   const priceConverted = getInputValue("price");
   if (priceConverted > 200) {
@@ -72,7 +92,9 @@ const updateTaxAndCharge = () => {
   }
 };
 
-//grandTotal update function
+/* ========================
+Grand Total Update Function
+======================== */
 const updateTotal = () => {
   const grandTotal =
     getInputValue("price") +
