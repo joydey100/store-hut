@@ -1,6 +1,10 @@
 /* ========================
 Loading Products from API
 ======================== */
+
+//
+
+// https://raw.githubusercontent.com/biswajitdasme/fakestore/main/db.json
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -17,22 +21,34 @@ const showProducts = (products) => {
   const allProducts = products.map((product) => product);
   for (const product of allProducts) {
     const image = product.image;
+    const { rate, count } = product.rating;
     const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
-      </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+    div.classList.add("product", "col-md-4");
+    div.innerHTML = `
+<div class="card h-100 py-4 px-3 shadow-lg">
+<img class="product-image card-img-top d-block mx-auto" src=${image}></img>
+<h2 class="mt-4 mb-3">${product.title}</h2>
+<p class="mb-3">Category: ${product.category}</p>
+<h4 class="mb-3">Price: $ ${product.price}</h4>
+<div class="d-flex justify-content-between">
+<div class="rating">
+<p> Rating :  ${rate} </p>     
+</div>
+ <div class="review">
+  <p> Reviews :  ${count} </p>        
+ </div>
+</div>
+<div class="d-flex"> 
+<button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn bg-main text-white">add to cart</button>
+<button id="details-btn" class="btn bg-main text-white ms-2">Details</button>
+</div>
+  </div>    
       `;
     document.getElementById("all-products").appendChild(div);
   }
 };
 
+// Initialize product count
 let count = 0;
 
 /* ===============================
@@ -52,7 +68,7 @@ Function for Getting Input Value
 ======================== */
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
-  const converted = parseInt(element);
+  const converted = parseFloat(element);
   return converted;
 };
 
@@ -63,14 +79,14 @@ const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
   const total = convertedOldPrice + convertPrice;
-  document.getElementById(id).innerText = Math.round(total);
+  document.getElementById(id).innerText = total.toFixed(2);
 };
 
 /* ========================
 Set Inner Text Function
 ========================== */
 const setInnerText = (id, value) => {
-  document.getElementById(id).innerText = Math.round(value);
+  document.getElementById(id).innerText = value.toFixed(2);
 };
 
 /* =======================================
@@ -100,5 +116,5 @@ const updateTotal = () => {
     getInputValue("price") +
     getInputValue("delivery-charge") +
     getInputValue("total-tax");
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };

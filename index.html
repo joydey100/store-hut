@@ -4,50 +4,91 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ranga Store</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <!-- Latest compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+    <title>Store Hut</title>
 
-    <!-- google Montserrat  font  -->
+    <!-- Google Poppins  Font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
-    <header></header>
-    <main class="main">
-      <div class="search-field">
-        <div class="search-box">
-          <input id="input-field" class="search-field" type="text" />
+    <!-- Header Start -->
+    <header>
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-main py-2">
+        <div class="container">
+          <a class="navbar-brand" href="#">Store Hut</a>
           <button
+            class="navbar-toggler"
             type="button"
-            class="btn btn-primary search-button"
-            data-toggle="button"
-            aria-pressed="false"
-            autocomplete="off"
-            id="search-btn"
-            onclick="loadProducts()"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            Search
+            <span class="navbar-toggler-icon"></span>
           </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </nav>
+    </header>
+    <!-- Header End -->
+
+    <!-- Main Section Start -->
+    <main class="main container">
       <div class="row">
         <div class="col-md-9 col-lg-9 col-sm-7">
-          <div id="all-products" class=""></div>
+          <div class="search-field my-5">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Product Name"
+              />
+              <button
+                class="btn bg-main text-white"
+                type="button"
+                id="search-btn"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          <div id="all-products" class="row g-3"></div>
         </div>
         <div class="col-md-3 col-lg-3 col-sm-5 cart-main">
-          <div class="cart" id="my-cart">
+          <div class="cart px-3 py-4" id="my-cart">
             <table class="table">
               <thead>
                 <h1>My-Cart</h1>
@@ -91,13 +132,26 @@
               </tbody>
             </table>
             <div class="parces text-center">
-              <button class="btn btn-primary text-center">Buy Now</button>
+              <button class="btn bg-main text-white text-center">
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
       </div>
     </main>
+    <!-- Main Section End -->
+
+    <!-- Footer Start -->
     <footer></footer>
+    <!-- Footer End -->
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- add javascript  file  -->
     <script src="./js/app.js"></script>
