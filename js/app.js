@@ -46,7 +46,7 @@ const showProducts = (products) => {
   <div> <i class="fas fa-user-circle text-secondary"></i>  ${count} Reviews </div>        
  </div>
 </div>
-<div class="d-flex"> 
+<div class="d-flex mt-2"> 
 <button onclick="addToCart(${price})" id="addToCart-btn" class="buy-now btn btn-main">Add to Cart</button>
 <button id="details-btn" class="btn btn-main ms-2" onclick="modalDetails(${id})">Details</button>
 </div>
