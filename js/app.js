@@ -7,7 +7,7 @@ const error = document.getElementById("error");
 const allProductsContainer = document.getElementById("all-products");
 const productModal = document.getElementById("product-modal");
 const modal = document.getElementById("details-modal");
-const span = document.getElementsByClassName("close")[0];
+const closeBtn = document.getElementsByClassName("close")[0];
 
 /* ========================
 Loading Products from API
@@ -174,9 +174,8 @@ loadProducts();
 Modal With Javascript
 ======================== */
 
-// When the user clicks the button, open the modal
 const modalDetails = (id) => {
-  // clear product modal
+  // clear previous modal content
   productModal.textContent = "";
 
   // Fetching Data
@@ -187,8 +186,8 @@ const modalDetails = (id) => {
   modal.style.display = "block";
 };
 
-// When the user clicks on X Button, the modal will close
-span.onclick = function () {
+// When the user clicks on X (close) Button, the modal will close
+closeBtn.onclick = function () {
   modal.style.display = "none";
 };
 
