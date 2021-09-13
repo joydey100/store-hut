@@ -7,11 +7,17 @@ body {
 .bg-main {
   background-color: #502bfe;
 }
+.text-main {
+  color: #502bfe;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
 
 /* Main Section */
 .product-image {
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
 }
 .card h2 {
   font-size: 22px;
@@ -26,4 +32,30 @@ body {
 }
 .cart-main {
   padding-right: 30px;
+}
+.btn-main {
+  border: 2px solid #502bfe;
+  color: #502bfe;
+  border-radius: 8px;
+  transition: 0.5s ease;
+}
+.btn-main:hover {
+  background-color: #502bfe;
+  color: #fff;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 768px) {
+  .cart {
+    width: 300px;
+    /* border: 1px solid green; */
+    padding: 10px;
+    box-shadow: 10px 10px 20px gray;
+    border-radius: 5px;
+    margin-right: 30px;
+    position: fixed;
+  }
+  .cart-main {
+    padding-right: 10px;
+  }
 }

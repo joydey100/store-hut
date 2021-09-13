@@ -2,11 +2,8 @@
 Loading Products from API
 ======================== */
 
-//
-
-// https://raw.githubusercontent.com/biswajitdasme/fakestore/main/db.json
 const loadProducts = () => {
-  const url = `https://fakestoreapi.com/products`;
+  const url = `https://fakestoreapi.com/products` || `./js/api.json`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => showProducts(data));
@@ -26,11 +23,11 @@ const showProducts = (products) => {
     div.classList.add("product", "col-md-4");
     div.innerHTML = `
 <div class="card h-100 py-4 px-3 shadow-lg">
-<img class="product-image card-img-top d-block mx-auto" src=${image}></img>
+<img class="product-image card-img-top d-block mx-auto img-fluid" src=${image}></img>
 <h2 class="mt-4 mb-3">${product.title}</h2>
-<p class="mb-3">Category: ${product.category}</p>
-<h4 class="mb-3">Price: $ ${product.price}</h4>
-<div class="d-flex justify-content-between">
+<h3 class="mb-3 text-main">Price: $${product.price}</h3>
+<p class="mb-2 text-secondary text-capitalize">Category: ${product.category}</p>
+<div class="d-flex justify-content-between text-secondary">
 <div class="rating">
 <p> Rating :  ${rate} </p>     
 </div>
@@ -39,8 +36,8 @@ const showProducts = (products) => {
  </div>
 </div>
 <div class="d-flex"> 
-<button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn bg-main text-white">add to cart</button>
-<button id="details-btn" class="btn bg-main text-white ms-2">Details</button>
+<button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-main">add to cart</button>
+<button id="details-btn" class="btn btn-main ms-2">Details</button>
 </div>
   </div>    
       `;
