@@ -37,19 +37,14 @@ const showProducts = (products) => {
 <img class="product-image card-img-top d-block mx-auto img-fluid" src=${image}></img>
 <h2 class="mt-4 mb-2">${title}</h2>
 <h3 class="mb-2 text-main">Price: $${price}</h3>
-<p class="mb-2 text-secondary text-capitalize">Category: ${category}</p>
+<p class="mb-2 text-secondary text-capitalize category">Category: ${category}</p>
 <div class="text-secondary">
-<div class="d-flex">
-<div class="rating d-flex">
-<div class="icons"> 
-<i class="fas fa-star"></i>
+<div class="rating mb-2">
+<div> <i class="fas fa-star"></i>  ${rate} Rating </div> 
 </div>
-<p class="ms-1"> ${rate} </p>     
-</div>
-<div class="review ms-3">
-  <p> <i class="fas fa-user-circle text-secondary"></i>  ${count} Reviews </p>        
+<div class="review mb-2">
+  <div> <i class="fas fa-user-circle text-secondary"></i>  ${count} Reviews </div>        
  </div>
-</div>
 </div>
 <div class="d-flex"> 
 <button onclick="addToCart(${price})" id="addToCart-btn" class="buy-now btn btn-main">Add to Cart</button>

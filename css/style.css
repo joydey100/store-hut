@@ -59,8 +59,9 @@ body {
   color: #7f8c8d;
 }
 .rating,
-.review {
-  font-size: 16px;
+.review,
+.category {
+  font-size: 17px;
 }
 
 /* Modal CSS */
