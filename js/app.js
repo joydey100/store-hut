@@ -1,14 +1,22 @@
 /* ========================
+Initialize Important Elements
+======================== */
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
+const error = document.getElementById("error");
+const allProductsContainer = document.getElementById("all-products");
+const productModal = document.getElementById("product-modal");
+
+/* ========================
 Loading Products from API
 ======================== */
 
 const loadProducts = () => {
-  const url = `https://fakestoreapi.com/products` || `./js/api.json`;
+  const url = `./js/api.json`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => showProducts(data));
 };
-loadProducts();
 
 /* ========================
 Show all product in UI
@@ -17,31 +25,37 @@ Show all product in UI
 const showProducts = (products) => {
   const allProducts = products.map((product) => product);
   for (const product of allProducts) {
-    const image = product.image;
     const { rate, count } = product.rating;
+    const { image, title, price, category, id } = product;
+
     const div = document.createElement("div");
     div.classList.add("product", "col-md-4");
     div.innerHTML = `
-<div class="card h-100 py-4 px-3 shadow-lg">
+<div class="card h-100 px-3 py-4 shadow-lg">
 <img class="product-image card-img-top d-block mx-auto img-fluid" src=${image}></img>
-<h2 class="mt-4 mb-3">${product.title}</h2>
-<h3 class="mb-3 text-main">Price: $${product.price}</h3>
-<p class="mb-2 text-secondary text-capitalize">Category: ${product.category}</p>
-<div class="d-flex justify-content-between text-secondary">
-<div class="rating">
-<p> Rating :  ${rate} </p>     
+<h2 class="mt-4 mb-2">${title}</h2>
+<h3 class="mb-2 text-main">Price: $${price}</h3>
+<p class="mb-2 text-secondary text-capitalize">Category: ${category}</p>
+<div class="text-secondary">
+<div class="d-flex">
+<div class="rating d-flex">
+<div class="icons"> 
+<i class="fas fa-star"></i>
 </div>
- <div class="review">
-  <p> Reviews :  ${count} </p>        
+<p class="ms-1"> ${rate} </p>     
+</div>
+<div class="review ms-3">
+  <p> <i class="fas fa-user-circle text-secondary"></i>  ${count} Reviews </p>        
  </div>
 </div>
+</div>
 <div class="d-flex"> 
-<button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-main">add to cart</button>
-<button id="details-btn" class="btn btn-main ms-2">Details</button>
+<button onclick="addToCart(${price})" id="addToCart-btn" class="buy-now btn btn-main">Add to Cart</button>
+<button id="details-btn" class="btn btn-main ms-2" onclick="modalDetails(${id})">Details</button>
 </div>
   </div>    
       `;
-    document.getElementById("all-products").appendChild(div);
+    allProductsContainer.appendChild(div);
   }
 };
 
@@ -51,7 +65,7 @@ let count = 0;
 /* ===============================
 Function for Adding and Updating the Cart
 ================================== */
-const addToCart = (id, price) => {
+const addToCart = (price) => {
   count = count + 1;
   updatePrice("price", price);
 
@@ -114,4 +128,106 @@ const updateTotal = () => {
     getInputValue("delivery-charge") +
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
+};
+
+/* ========================
+Filter Prouduct Fucntion
+======================== */
+
+const filterProducts = (searchValue) => {
+  const products = document.getElementsByClassName("product");
+
+  for (let product of products) {
+    if (product.innerText.toLowerCase().includes(searchValue)) {
+      error.textContent = "";
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+  }
+};
+
+/* ========================
+Search Button Event Listener
+======================== */
+searchBtn.addEventListener("click", () => {
+  const productName = searchInput.value.toLowerCase();
+
+  error.textContent = "";
+
+  if (productName === "") {
+    error.innerText = "Please give a Product Name";
+  } else {
+    error.textContent = "";
+    filterProducts(productName);
+  }
+
+  // Clear Value
+  searchInput.value = "";
+});
+
+loadProducts();
+
+/* ========================
+Modal With Javascript
+======================== */
+var modal = document.getElementById("details-modal");
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+const modalDetails = (id) => {
+  // clear product modal
+  productModal.textContent = "";
+
+  // Fetching Data
+  fetch(`https://fakestoreapi.com/products/${id}`)
+    .then((res) => res.json())
+    .then((data) => updateModal(data));
+
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+/* ========================
+Update Modal with UI
+======================== */
+const updateModal = (info) => {
+  const { rate, count } = info.rating;
+  const { image, title, price, category, description } = info;
+
+  const div = document.createElement("div");
+  div.innerHTML = `
+<div class="p-3">
+<img class="d-block mx-auto modal-img" src=${image}></img>
+<h2 class="mt-4 mb-2">${title}</h2>
+<p class="mb-2 text-secondary">${description}</p>
+<h3 class="mb-2 text-main">Price: $${price}</h3>
+<p class="mb-2 text-secondary text-capitalize">Category: ${category}</p>
+<div class="text-secondary">
+<div class="d-flex">
+<div class="rating d-flex">
+<div class="icons"> 
+<i class="fas fa-star"></i>
+</div>
+<p class="ms-1"> ${rate} </p>     
+</div>
+<div class="review ms-3">
+<p> <i class="fas fa-user-circle text-secondary"></i>  ${count} Reviews </p>        
+</div>
+</div>
+</div>
+</div>    
+    `;
+  productModal.appendChild(div);
 };
