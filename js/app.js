@@ -6,6 +6,8 @@ const searchBtn = document.getElementById("search-btn");
 const error = document.getElementById("error");
 const allProductsContainer = document.getElementById("all-products");
 const productModal = document.getElementById("product-modal");
+const modal = document.getElementById("details-modal");
+const span = document.getElementsByClassName("close")[0];
 
 /* ========================
 Loading Products from API
@@ -171,8 +173,6 @@ loadProducts();
 /* ========================
 Modal With Javascript
 ======================== */
-var modal = document.getElementById("details-modal");
-var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 const modalDetails = (id) => {
@@ -187,14 +187,14 @@ const modalDetails = (id) => {
   modal.style.display = "block";
 };
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on X Button, the modal will close
 span.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside of the modal, modal will close
 window.onclick = function (event) {
-  if (event.target == modal) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
 };

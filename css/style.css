@@ -125,4 +125,7 @@ body {
   .modal-content {
     width: 80%;
   }
+  .modal-img {
+    width: 65%;
+  }
 }
